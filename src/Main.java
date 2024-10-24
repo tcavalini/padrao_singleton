@@ -1,18 +1,17 @@
 public class Main {
     public static void main(String[] args) {
 
-        DatabaseConnectionManager dbManager1 = DatabaseConnectionManager.getInstance();
-        System.out.println(dbManager1.getConnectionStatus());
+        GerenciadorConexaoBancoDados gerenciador1 = GerenciadorConexaoBancoDados.obterInstancia();
+        System.out.println(gerenciador1.obterStatusConexao());
 
-        dbManager1.executeQuery("SELECT * FROM usuarios");
+        gerenciador1.executarConsulta("SELECT * FROM usuarios");
 
-        DatabaseConnectionManager dbManager2 = DatabaseConnectionManager.getInstance();
+        GerenciadorConexaoBancoDados gerenciador2 = GerenciadorConexaoBancoDados.obterInstancia();
+        System.out.println("As instâncias são iguais? " + (gerenciador1 == gerenciador2));
 
-        System.out.println("As instâncias são iguais? " + (dbManager1 == dbManager2));
+        gerenciador1.fecharConexao();
 
-        dbManager1.closeConnection();
-
-        DatabaseConnectionManager dbManager3 = DatabaseConnectionManager.getInstance();
-        System.out.println(dbManager3.getConnectionStatus());
+        GerenciadorConexaoBancoDados gerenciador3 = GerenciadorConexaoBancoDados.obterInstancia();
+        System.out.println(gerenciador3.obterStatusConexao());
     }
 }
